@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ohns_guide/headandneck.dart';
+import 'package:ohns_guide/pediatrics.dart';
+import 'package:ohns_guide/otology.dart';
+import 'package:ohns_guide/rhinology.dart';
+import 'package:ohns_guide/laryngology.dart';
 
 class HomeButtonBox extends StatelessWidget {
   final String buttonText;
@@ -20,24 +25,40 @@ class HomeButtonBox extends StatelessWidget {
                   children: [
                     Image.asset('assets/$image'),
                     Text(buttonText, textScaleFactor: 1.9)
-              ]),
+                  ]),
               onPressed: () {
                 print("Pressed home button: $buttonText");
+                switch (buttonText) {
+                  case 'Head & Neck': {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HeadAndNeck()));
+                  }
+                  break;
+                  case 'Pediatrics': {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Pediatrics()));
+                  }
+                  break;
+                  case 'Otology': {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Otology()));
+                  }
+                  break;
+                  case 'Rhinology': {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Rhinology()));
+                  }
+                  break;
+                  case 'Laryngology': {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Laryngology()));
+                  }
+                  break;
+                }
               },
               color: buttonColor,
               textColor: Colors.white,
               highlightColor: Colors.transparent),
         ));
-
-    /*
-        child: RaisedButton(
-          child: Text(buttonText),
-          onPressed: () {
-            print("Pressed: $buttonText");
-          },
-          color: buttonColor,
-          textColor: Colors.white,
-          highlightColor: Colors.transparent,
-        ));*/
   }
 }

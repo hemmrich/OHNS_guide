@@ -6,7 +6,7 @@ import './homebuttonbox.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double dividedHeight = MediaQuery.of(context).size.height / 4;
+    final double dividedHeight = MediaQuery.of(context).size.height / 5;
 
     return Scaffold(
         backgroundColor: Colors.amber,
@@ -37,6 +37,12 @@ class HomePage extends StatelessWidget {
                 buttonColor: Colors.deepPurple,
                 image: 'icons8-smelling-50.png',
                 height: dividedHeight,
+              ),
+              HomeButtonBox(
+                buttonText: 'Laryngology',
+                buttonColor: Colors.teal,
+                image: 'icons8-voice-50.png',
+                height: dividedHeight
               )
             ]
         )

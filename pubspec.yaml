@@ -50,6 +50,7 @@ flutter:
     - assets/icons8-hearing-50.png
     - assets/icons8-smelling-50.png
     - assets/icons8-baby-feet-50.png
+    - assets/icons8-voice-50.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
