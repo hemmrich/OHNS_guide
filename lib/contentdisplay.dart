@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/services.dart';
+
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class ContentDisplay extends StatefulWidget {
 
@@ -19,27 +20,31 @@ class ContentDisplayState extends State<ContentDisplay> {
 
   final String title;
   final Color color;
+  String htmlContent = '';
 
-  ContentDisplayState({this.title, this.color});
+  ContentDisplayState({this.title, this.color}) {
+    loadAsset();
+  }
 
-  WebViewController _controller;
-
-  Future<void> loadHtmlFromAssets(String filename, controller) async {
-    String fileText = await rootBundle.loadString(filename);
-    controller.loadUrl(Uri.dataFromString(fileText, mimeType: 'text/html').toString());
+  void loadAsset() async {
+    String tmp = await rootBundle.loadString('assets/neck_dissection.html');
+    setState(() {
+      htmlContent = tmp;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title), backgroundColor: color),
-      body: WebView(
-        initialUrl: '',
-        onWebViewCreated: (WebViewController webViewController) async {
-          _controller = webViewController;
-          await loadHtmlFromAssets('assets/neck_dissection.html', _controller);
-        },
-      )
+    print("In ContentDisplayState $title build");
+    return WebviewScaffold(
+      appBar: AppBar(title: Text(title), backgroundColor: color,),
+      allowFileURLs: true,
+      url: new Uri.dataFromString(htmlContent, mimeType: 'text/html').toString(),
+      withZoom: true,
+      withJavascript: true,
+      withLocalStorage: true,
+      hidden: true,
+      useWideViewPort: true,
     );
   }
 }
