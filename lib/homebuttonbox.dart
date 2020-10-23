@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:ohns_guide/headandneck.dart';
-import 'package:ohns_guide/pediatrics.dart';
-import 'package:ohns_guide/otology.dart';
-import 'package:ohns_guide/rhinology.dart';
-import 'package:ohns_guide/laryngology.dart';
 
+import 'package:ohns_guide/constants.dart';
+
+/*
+To-do:
+- Split row into 1/3 image, 2/3 text (center text in container)
+- Invert images into white outlines
+ */
+
+// ignore: must_be_immutable
 class HomeButtonBox extends StatelessWidget {
-  final String buttonText;
-  final Color buttonColor;
+  final String id;
+  String buttonText;
+  Color buttonColor;
   final double height;
-  final String image;
+  String image;
+  final Widget specialtyWidget;
 
-  HomeButtonBox({this.buttonText, this.buttonColor, this.height, this.image});
+  HomeButtonBox({this.id, this.height, this.specialtyWidget}) {
+    buttonText = Constants.map[id]['title'];
+    buttonColor = Constants.map[id]['color'];
+    image = Constants.map[id]['image'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,33 +38,8 @@ class HomeButtonBox extends StatelessWidget {
                   ]),
               onPressed: () {
                 print("Pressed home button: $buttonText");
-                switch (buttonText) {
-                  case 'Head & Neck': {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HeadAndNeck()));
-                  }
-                  break;
-                  case 'Pediatrics': {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Pediatrics()));
-                  }
-                  break;
-                  case 'Otology': {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Otology()));
-                  }
-                  break;
-                  case 'Rhinology': {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Rhinology()));
-                  }
-                  break;
-                  case 'Laryngology': {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Laryngology()));
-                  }
-                  break;
-                }
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => specialtyWidget));
               },
               color: buttonColor,
               textColor: Colors.white,

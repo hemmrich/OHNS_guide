@@ -1,12 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import './homebuttonbox.dart';
+import 'package:ohns_guide/homebuttonbox.dart';
+import 'package:ohns_guide/headandneck.dart';
+import 'package:ohns_guide/pediatrics.dart';
+import 'package:ohns_guide/otology.dart';
+import 'package:ohns_guide/rhinology.dart';
+import 'package:ohns_guide/laryngology.dart';
+import 'package:ohns_guide/facialplastics.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double dividedHeight = MediaQuery.of(context).size.height / 5;
+    final double dividedHeight = MediaQuery.of(context).size.height / 6;
 
     return Scaffold(
         backgroundColor: Colors.amber,
@@ -15,78 +21,37 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               HomeButtonBox(
-                buttonText: 'Head & Neck',
-                buttonColor: Colors.red,
-                image: 'icons8-head-profile-50.png',
+                id: 'headandneck',
                 height: dividedHeight,
+                specialtyWidget: HeadAndNeck(),
               ),
               HomeButtonBox(
-                buttonText: 'Pediatrics',
-                buttonColor: Colors.blue,
-                image: 'icons8-baby-feet-50.png',
+                id: 'pediatrics',
                 height: dividedHeight,
+                specialtyWidget: Pediatrics(),
               ),
               HomeButtonBox(
-                buttonText: 'Otology',
-                buttonColor: Colors.orange,
-                image: 'icons8-hearing-50.png',
+                id: 'otology',
                 height: dividedHeight,
+                specialtyWidget: Otology(),
               ),
               HomeButtonBox(
-                buttonText: 'Rhinology',
-                buttonColor: Colors.deepPurple,
-                image: 'icons8-smelling-50.png',
+                id: 'rhinology',
                 height: dividedHeight,
+                specialtyWidget: Rhinology(),
               ),
               HomeButtonBox(
-                buttonText: 'Laryngology',
-                buttonColor: Colors.teal,
-                image: 'icons8-voice-50.png',
-                height: dividedHeight
+                id: 'laryngology',
+                height: dividedHeight,
+                specialtyWidget: Laryngology(),
+              ),
+              HomeButtonBox(
+                  id: 'facialplastics',
+                  height: dividedHeight,
+                specialtyWidget: FacialPlastics(),
               )
             ]
         )
     );
   }
 }
-
-/*
-Notes:
-- Want vertically arranged buttons
-
-class MyHomePage extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            RaisedButton(
-              textColor: Colors.white,
-              color: Color(0xFF6200EE),
-              highlightColor: Colors.transparent,
-              onPressed: () {
-                // Respond to button press
-              },
-              child: Text('CONTAINED BUTTON'),
-            ),
-            RaisedButton.icon(
-              textColor: Colors.white,
-              color: Color(0xFF6200EE),
-              highlightColor: Colors.transparent,
-              onPressed: () {
-                // Respond to button press
-              },
-              icon: Icon(Icons.add, size: 18),
-              label: Text("CONTAINED BUTTON"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
- */
