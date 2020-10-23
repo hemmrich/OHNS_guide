@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:ohns_guide/gridviewbox.dart';
+import 'package:ohns_guide/constants.dart';
+
 /*
 Content:
 - Pathologies
@@ -21,10 +24,14 @@ Content:
 
 
 class Otology extends StatelessWidget {
+
+  final String id = 'otology';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Otology'), backgroundColor: Colors.orange),
+        appBar: AppBar(title: Text(Constants.map[id]['title']),
+            backgroundColor: Constants.map[id]['color']),
         body: Text('Otology screen')
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:ohns_guide/gridviewbox.dart';
+import 'package:ohns_guide/constants.dart';
 
 /*
 Content:
@@ -19,11 +20,14 @@ Content:
  */
 
 class HeadAndNeck extends StatelessWidget {
+
+  final String id = 'headandneck';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Head & Neck'), backgroundColor: Colors.red),
-      //body: Text('Head and Neck screen')
+      appBar: AppBar(title: Text(Constants.map[id]['title']),
+                     backgroundColor: Constants.map[id]['color']),
       body: GridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 10,

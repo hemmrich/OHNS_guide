@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const Map headandneck = {
+  static Map headandneck = {
     'id': 'headandneck',
     'title': 'Head & Neck',
     'color': Colors.red,
-    'image': 'icons8-head-profile-50.png'
+    'image': 'icons8-head-profile-50.png',
   };
 
   static const Map pediatrics = {
@@ -43,7 +43,7 @@ class Constants {
     'image': 'icons8-plastic-50.png',
   };
 
-  static const Map map = {
+  static Map map = {
     'headandneck': headandneck,
     'pediatrics': pediatrics,
     'otology': otology,

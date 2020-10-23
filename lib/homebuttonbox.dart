@@ -38,6 +38,7 @@ class HomeButtonBox extends StatelessWidget {
                   ]),
               onPressed: () {
                 print("Pressed home button: $buttonText");
+                print(Constants.map[id]);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => specialtyWidget));
               },
