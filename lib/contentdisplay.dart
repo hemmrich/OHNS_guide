@@ -40,7 +40,7 @@ class ContentDisplayState extends State<ContentDisplay> {
       appBar: AppBar(title: Text(title), backgroundColor: color,),
       allowFileURLs: true,
       url: new Uri.dataFromString(htmlContent, mimeType: 'text/html').toString(),
-      withZoom: true,
+      withZoom: false,
       withJavascript: true,
       withLocalStorage: true,
       hidden: true,
