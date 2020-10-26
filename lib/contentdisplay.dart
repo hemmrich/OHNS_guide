@@ -1,20 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:local_assets_server/local_assets_server.dart';
 
 class ContentDisplay extends StatefulWidget {
 
   final String title;
   final Color color;
-
   ContentDisplay({this.title, this.color});
 
   @override
   State<StatefulWidget> createState() {
-    return ContentDisplayState(title: title, color: color, file: getContentFilename());
+    return _ContentDisplayState(title: title, color: color, file: getContentFilename());
   }
 
   String getContentFilename() {
@@ -25,38 +23,42 @@ class ContentDisplay extends StatefulWidget {
   }
 }
 
-class ContentDisplayState extends State<ContentDisplay> {
+class _ContentDisplayState extends State<ContentDisplay> {
+
+  bool isListening = false;
+  String address;
+  int port;
 
   final String title;
   final Color color;
   final String file;
-  String htmlContent = '';
 
-  ContentDisplayState({this.title, this.color, this.file}) {
-    loadAsset();
-    print("Returning from ContentDisplayState constructor");
+  _ContentDisplayState({this.title, this.color, this.file});
+
+  @override
+  void initState() {
+    _initServer();
+
+    super.initState();
   }
 
-  void loadAsset() async {
-    String tmp = await rootBundle.loadString('assets/$file.html');
-    updateState(tmp);
-  }
+  _initServer() async {
+    final server = new LocalAssetsServer(address: InternetAddress.loopbackIPv4,
+                                         assetsBasePath: 'web');
+    final internetAddress = await server.serve();
 
-  void updateState(String newState) {
     setState(() {
-      print("Setting state for ContentDisplayState...");
-      htmlContent = newState;
-      print("Completed setState in ContentDisplayState.");
+      address = internetAddress.address;
+      this.port = server.boundPort;
+      isListening = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("In ContentDisplayState $title build");
     return WebviewScaffold(
       appBar: AppBar(title: Text(title), backgroundColor: color,),
-      allowFileURLs: true,
-      url: new Uri.dataFromString(htmlContent, mimeType: 'text/html').toString(),
+      url: "http://$address:$port/$file.html",
       withZoom: false,
       withJavascript: true,
       withLocalStorage: true,
