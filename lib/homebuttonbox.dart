@@ -13,11 +13,10 @@ class HomeButtonBox extends StatelessWidget {
   final String id;
   String buttonText;
   Color buttonColor;
-  final double height;
   String image;
   final Widget specialtyWidget;
 
-  HomeButtonBox({this.id, this.height, this.specialtyWidget}) {
+  HomeButtonBox({this.id, this.specialtyWidget}) {
     buttonText = Constants.map[id]['title'];
     buttonColor = Constants.map[id]['color'];
     image = Constants.map[id]['image'];
@@ -25,9 +24,7 @@ class HomeButtonBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        height: height,
+    return Expanded(
         child: Container(
           child: RaisedButton(
               child: Row(
