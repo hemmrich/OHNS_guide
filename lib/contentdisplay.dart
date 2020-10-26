@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -37,17 +39,20 @@ class ContentDisplayState extends State<ContentDisplay> {
 
   void loadAsset() async {
     String tmp = await rootBundle.loadString('assets/$file.html');
-    //print("loadAsset: $tmp");
+    updateState(tmp);
+  }
+
+  void updateState(String newState) {
     setState(() {
-      htmlContent = tmp;
-      print("Setting state for ContentDisplayState constructor");
+      print("Setting state for ContentDisplayState...");
+      htmlContent = newState;
+      print("Completed setState in ContentDisplayState.");
     });
   }
 
   @override
   Widget build(BuildContext context) {
     print("In ContentDisplayState $title build");
-    print(" ---> htmlContent: $htmlContent");
     return WebviewScaffold(
       appBar: AppBar(title: Text(title), backgroundColor: color,),
       allowFileURLs: true,
