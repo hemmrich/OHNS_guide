@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:local_assets_server/local_assets_server.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ContentDisplay extends StatefulWidget {
 
@@ -43,8 +44,20 @@ class _ContentDisplayState extends State<ContentDisplay> {
   }
 
   _initServer() async {
+
+    /* testing */
+    print("Listing getApplicationDocumentDirectory():");
+    String assetPath = (await getApplicationDocumentsDirectory()).path;
+    var dir = new Directory(assetPath);
+    List allContents = dir.listSync();
+    for (var file in allContents) {
+      print(file);
+    }
+    print(' ');
+
     final server = new LocalAssetsServer(address: InternetAddress.loopbackIPv4,
-                                         assetsBasePath: 'web');
+                                          assetsBasePath: assetPath + '/');
+                                         //assetsBasePath: 'web');
     final internetAddress = await server.serve();
 
     setState(() {
